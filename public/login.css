@@ -1,0 +1,68 @@
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+}
+
+.container{
+    width: 400px;
+    height: 500px;
+    background-color: white;
+    box-shadow: 5px 7px 15px  hsl(0, 0%, 0%, 0.5);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.container h1{
+    margin-bottom: 50px;
+}
+
+.container div{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 60px;
+    position: relative;
+}
+
+.container .error{
+    margin-bottom: 0;
+    position: absolute;
+    bottom: -40px;
+    left: 3px;
+    color: red;
+}
+
+.container #password-error{
+    bottom: -60px;
+}
+
+.container input[type='text'], .container input[type='password']{
+    width: 300px;
+    height: 30px;
+}
+
+
+.password-container div{
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    bottom: -100px;
+}
+
+.password-container input[type='checkbox']{
+    cursor: pointer;
+}
+
+.container #submit-btn{
+    width: 150px;
+    height: 35px;
+    background-color: rgb(3, 133, 247);
+    color: white;
+    margin-top: 40px;
+    cursor: pointer;
+}

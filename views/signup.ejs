@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign up</title>
+    <link rel="stylesheet" href="/login.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Sign up</h1>
+        <div>
+            <label for="username">Username</label>
+            <input type="text" id="username">
+            <div class="error" id="username-error"></div>
+        </div>
+
+        <div class="password-container">
+            <label for="password">Password</label>
+            <input type="password" id="password">
+            <div>
+                <input type="checkbox" id="showPassword" onclick="showPassword()"> Show Password
+            </div>
+            <div class="error" id="password-error"></div>
+        </div>
+        <button id="submit-btn">Submit</button>
+    </div>
+</body>
+</html>
+
+<script>
+    function showPassword(){
+        const passwordInput = document.getElementById('password');
+        passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password';
+    }
+
+    document.getElementById('submit-btn').onclick = async function() {
+        const usernameError = document.getElementById('username-error');
+        const passwordError = document.getElementById('password-error');
+
+         //reset errors
+        usernameError.textContent = '';
+        passwordError.textContent = '';
+
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+
+        try {
+            const response = await fetch('/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    username,
+                    password
+                }),
+            });
+                const result = await response.json();
+                console.log(result);
+                if(result.errors){
+                    usernameError.textContent = result.errors.username;
+                    passwordError.textContent = result.errors.password;
+                }
+                
+                if(result.user){
+                    location.assign('/students');
+                }
+            }catch (error) {
+                alert(error);
+            }
+    } 
+</script>
